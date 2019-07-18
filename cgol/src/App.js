@@ -10,7 +10,7 @@ export default class App extends Component {
     running: false
   };
 
-  handleRowChange(e) {
+  handleRowChange = e => {
     if (!this.state.running) {
       let actualSize = this.state.size;
 
@@ -23,9 +23,9 @@ export default class App extends Component {
 
       this.renderBoard();
     }
-  }
+  };
 
-  handleColumnChange(e) {
+  handleColumnChange = e => {
     if (!this.state.running) {
       let actualSize = this.state.size;
       if (e.target.value < 40) actualSize[0] = e.target.value;
@@ -37,9 +37,9 @@ export default class App extends Component {
 
       this.renderBoard();
     }
-  }
+  };
 
-  startGame() {
+  startGame = () => {
     if (!this.state.running) {
       this.setState(
         {
@@ -50,9 +50,9 @@ export default class App extends Component {
         }
       );
     }
-  }
+  };
 
-  stopGame() {
+  stopGame = () => {
     this.setState(
       {
         running: false
@@ -63,21 +63,47 @@ export default class App extends Component {
         }
       }
     );
-  }
+  };
 
-  runGame() {
+  runGame = () => {
     this.setState({
       rules: this.state.rules.addGeneration()
     });
-  }
+  };
 
-  renderGrid() {
+  storeCell = position => {
+    if (!this.state.running) {
+      this.setState({
+        rules: this.state.rules.storeCell(position)
+      });
+    }
+  };
+
+  renderGrid = () => {
     let grid = [];
     let cellRow = [];
 
-    for (let i = 0; i < this.state.size[0]; i++) {
-      for (let j = 0; j < this.state.size[1]; j++) {
-        cellRow.push(<Cell key={[i, j]} />);
+    for (var i = 0; i < this.state.size[0]; i++) {
+      for (var j = 0; j < this.state.size[1]; j++) {
+        if (this.state.rules.isCellAlive(i + " , " + j)) {
+          cellRow.push(
+            <Cell
+              key={[i, j]}
+              position={{ x: i, y: j }}
+              live={true}
+              storeCell={this.storeCell}
+            />
+          );
+        } else {
+          cellRow.push(
+            <Cell
+              key={[i, j]}
+              position={{ x: i, y: j }}
+              live={false}
+              storeCell={this.storeCell}
+            />
+          );
+        }
       }
       grid.push(
         <div className="row" key={i}>
@@ -88,7 +114,7 @@ export default class App extends Component {
     }
 
     return grid;
-  }
+  };
 
   render() {
     return (
@@ -123,6 +149,7 @@ export default class App extends Component {
             </button>
           </div>
           Generation:
+          {this.state.rules.getGeneration()}
         </div>
         <div className="gridContainer">{this.renderGrid()}</div>
       </div>

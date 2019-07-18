@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Rules extends Component {
+export default class Rules {
   constructor(generation = 0, liveCells = new Map()) {
     this.generation = generation;
     this.liveCells = liveCells;
