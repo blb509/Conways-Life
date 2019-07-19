@@ -1,0 +1,22 @@
+.cellContainer {
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  margin: 1px;
+  border: 1px solid black;
+}
+
+.cellContainerDead {
+  display: flex;
+  padding: 10px;
+  margin: 1px;
+  border: 1px solid black;
+}
+
+.cellContainerLive {
+  display: flex;
+  padding: 10px;
+  margin: 1px;
+  border: 1px solid black;
+  background-color: black;
+}
