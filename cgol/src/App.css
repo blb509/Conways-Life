@@ -2,12 +2,27 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  margin-bottom: 50px;
 }
 
 .controls {
   display: flex;
   flex-direction: column;
   flex: 1;
+  margin: 0 auto;
+  width: 50%;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0 auto;
+  width: 50%;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 .submit {
@@ -19,7 +34,7 @@
   display: flex;
   text-align: center;
   width: 200px;
-  padding: 20px 20px 0 20px;
+  padding: 20px 0;
 }
 
 .label {
@@ -43,5 +58,5 @@
   display: flex;
   justify-content: space-between;
   width: 20%;
-  padding: 0 20px 20px;
+  padding: 20px 0;
 }

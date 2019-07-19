@@ -21,7 +21,7 @@ export default class App extends Component {
         size: actualSize
       });
 
-      this.renderBoard();
+      this.renderGrid();
     }
   };
 
@@ -35,7 +35,7 @@ export default class App extends Component {
         size: actualSize
       });
 
-      this.renderBoard();
+      this.renderGrid();
     }
   };
 
@@ -69,6 +69,22 @@ export default class App extends Component {
     this.setState({
       rules: this.state.rules.addGeneration()
     });
+  };
+
+  clearGame = () => {
+    this.setState(
+      {
+        running: false
+      },
+      () => {
+        if (this.intervalRef) {
+          clearInterval(this.intervalRef);
+          this.setState({
+            rules: new Rules()
+          });
+        }
+      }
+    );
   };
 
   storeCell = position => {
@@ -147,9 +163,44 @@ export default class App extends Component {
             <button className="submit" onClick={this.stopGame}>
               Stop
             </button>
+            <button className="submit" onClick={this.clearGame}>
+              Clear
+            </button>
           </div>
-          Generation:
-          {this.state.rules.getGeneration()}
+          Generation: {this.state.rules.getGeneration()}
+        </div>
+        <div className="text">
+          <div>
+            Rules:
+            <ol>
+              <li>If a living cell does not have 2 or 3 neighbors, it dies</li>
+              <li>If a dead cell has 3 neighbors, it becomes alive</li>
+            </ol>
+          </div>
+          <div>
+            History of Conways Rules of Life:
+            <br />
+            Created by mathematician John Horton Conway, the Game of Life was
+            made because Conway was interested in finding unique and interesting
+            cell automaton after being inspired by the work of Jon von Neumann
+            and Stanislaw Ulman. <br /> <br />
+          </div>
+          <div>
+            Process of making Conways Game of Life:
+            <br />
+            Having never heard of Conways Game of Life, the first thing I had to
+            do was research online extensively what it was and how it worked.
+            After having read some articles and seen examples of the game
+            working I felt like understood what it was that I needed to do. I
+            felt most comfortable using react so I chose that as the tool I was
+            going to use to implement the game. I then followed along with a
+            tutorial I found online to actually do the project. While I would
+            have liked to do the project completely by myself, I had never done
+            anything like it nor did I feel like there were things I had done in
+            the past that were similar enough to this. So for me, using a
+            tutorial was the best way for me to understand and complete this
+            project.
+          </div>
         </div>
         <div className="gridContainer">{this.renderGrid()}</div>
       </div>
